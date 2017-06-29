@@ -23,7 +23,7 @@ public class MergeSort {
 			//Middle of array
 			int middle=(left+right)/2;
 			
-			//Sort sub-arrays
+			//Sort subarrays
 			mergeSort(arr,left,middle);
 			mergeSort(arr,middle+1,right);
 			
@@ -34,6 +34,42 @@ public class MergeSort {
 
 	private static void merge(int[] arr, int left, int middle, int right) {
 		
+		//Initialize subarrays
+		int [] leftArr = new int [middle-left+1];
+		int [] rightArr = new int [right-middle];
+		
+		//Fill subarrays
+		for (int i = 0; i < leftArr.length; i++)
+			leftArr[i] = arr[left+i];
+		for (int j = 0; j < rightArr.length; j++) {
+			rightArr[j] = arr[middle+1+j]; 
+		}
+		
+		int i=0, j=0, k=left;
+		//Merge subarrays
+		while(i < leftArr.length && j < rightArr.length){
+			if(leftArr[i] < rightArr[j]){
+				arr[k] = leftArr[i];
+				i++;
+			}
+			else{
+				arr[k] = rightArr[j];
+				j++;
+			}
+			k++;
+		}
+		
+		//Add remaining values
+		while (i < leftArr.length){
+			arr[k] = leftArr[i];
+			i++;
+			k++;
+		}
+		while (j < rightArr.length){
+			arr[k] = rightArr[j];
+			j++;
+			k++;
+		}
 		
 	}
 
@@ -42,6 +78,7 @@ public class MergeSort {
 		for (int i : arr) {
 			System.out.print(i+" ");
 		}
+		System.out.println();
 	}
 
 }
